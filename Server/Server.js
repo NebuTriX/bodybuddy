@@ -12,7 +12,7 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(bodyParser.json());
 
-mongoose.connect('mongodb://localhost:3000/bodybuddy', {
+mongoose.connect('mongodb://localhost:27017/bodybuddy', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
