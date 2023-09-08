@@ -1,45 +1,72 @@
 const express = require('express');
-const sqlite3 = require('sqlite3');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const User = require('./models/User');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
-const db = new sqlite3.Database('./db.sqlite');
-
-db.run(`
-  CREATE TABLE IF NOT EXISTS users (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT UNIQUE NOT NULL,
-    password TEXT NOT NULL
-  )
-`);
-
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/api/users', (req, res) => {
-  const { username, password } = req.body;
-  db.run('INSERT INTO users (username, password) VALUES (?, ?)', [username, password], (err) => {
-    if (err) {
-      return res.status(500).json({ error: 'Could not create user.' });
-    }
-    res.status(201).json({ message: 'User created successfully.' });
+mongoose.connect('mongodb://localhost:3000/bodybuddy', {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+  .then(() => {
+    console.log('Connected to MongoDB');
+  })
+  .catch((err) => {
+    console.error('Error connecting to MongoDB:', err);
   });
+
+app.post('/api/register', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const existingUser = await User.findOne({ username });
+
+    if (existingUser) {
+      return res.status(400).json({ error: 'Username already exists.' });
+    }
+
+    const hashedPassword = await bcrypt.hash(password, 10);
+    const newUser = new User({ username, password: hashedPassword });
+
+    await newUser.save();
+
+    res.status(201).json({ message: 'User registered successfully.' });
+  } catch (error) {
+    console.error('Error registering user:', error);
+    res.status(500).json({ error: 'Could not register user.' });
+  }
 });
 
-app.get('/api/users/:username', (req, res) => {
-  const { username } = req.params;
-  db.get('SELECT * FROM users WHERE username = ?', [username], (err, user) => {
-    if (err) {
-      return res.status(500).json({ error: 'Could not fetch user data.' });
-    }
+app.post('/api/login', async (req, res) => {
+  try {
+    const { username, password } = req.body;
+
+    const user = await User.findOne({ username });
+
     if (!user) {
-      return res.status(404).json({ error: 'User not found.' });
+      return res.status(401).json({ error: 'Invalid username or password.' });
     }
-    res.json({ user });
-  });
+    const passwordMatch = await bcrypt.compare(password, user.password);
+
+    if (!passwordMatch) {
+      return res.status(401).json({ error: 'Invalid username or password.' });
+    }
+
+    const token = jwt.sign({ userId: user._id }, 'This_Is_A_Secret');
+
+    res.status(200).json({ message: 'Login successful.', token });
+  } catch (error) {
+    console.error('Error logging in:', error);
+    res.status(500).json({ error: 'Could not log in.' });
+  }
 });
 
 app.listen(port, () => {
