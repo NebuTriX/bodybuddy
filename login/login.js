@@ -1,31 +1,30 @@
-document.getElementById('loginForm').addEventListener('submit', async function (e) {
-    e.preventDefault();
+// server.js
 
-    const username = document.getElementById('username').value;
-    const password = document.getElementById('password').value;
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
 
-  
-    const isCredentialsValid = await checkCredentials(username, password);
+app.use(bodyParser.json());
 
-    if (isCredentialsValid) {
-       
-        alert('Login successful');
-        window.location.href = '/secure-page.html';
+const users = [
+    { username: 'user1', password: 'password1' },
+    { username: 'user2', password: 'password2' },
+];
+
+app.post('/authenticate', (req, res) => {
+    const { username, password } = req.body;
+
+    const user = users.find(u => u.username === username && u.password === password);
+
+    if (user) {
+    
+        res.json({ authenticated: true, username: user.username });
     } else {
-        alert('Login failed. Check your credentials.');
+        res.json({ authenticated: false });
     }
 });
 
-async function checkCredentials(username, password) {
-    
-    const web3 = new Web3(Web3.givenProvider);
-
-    const authorizedUsers = [
-        { username: 'user1', password: 'password1' },
-        { username: 'user2', password: 'password2' },
-    ];
-
-    const user = authorizedUsers.find(u => u.username === username && u.password === password);
-
-    return !!user;
-}
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
