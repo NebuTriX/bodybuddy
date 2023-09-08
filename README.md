@@ -1,6 +1,6 @@
-# BodyBuddy - Fitness Exercise App with Machine Learning
+# bodybuddy - Fitness Exercise App with Machine Learning
 
-BodyBuddy is afitness exercise app built with React 18. It leverages machine learning and your device's webcam to recommend exercises for different target areas, correct your pose, and count your reps. Get ready to elevate your fitness journey to the next level!
+bodybuddy is afitness exercise app built with React 18. It leverages machine learning and your device's webcam to recommend exercises for different target areas, correct your pose, and count your reps. Get ready to elevate your fitness journey to the next level!
 
 ## Features
 
@@ -26,13 +26,13 @@ BodyBuddy is afitness exercise app built with React 18. It leverages machine lea
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/NebulaTris/BodyBuddy.git
+git clone https://github.com/NebulaTris/bodybuddy.git
 ```
 
 2. Navigate to the project directory:
 
 ```bash
-cd BodyBuddy
+cd bodybuddy
 ```
 
 3. Install dependencies:
@@ -83,8 +83,8 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Special thanks to the React community for their continuous support and contributions.
 
-- The BodyBuddy team extends gratitude to the open-source community for their invaluable resources.
+- The bodybuddy team extends gratitude to the open-source community for their invaluable resources.
 
 ---
 
-Feel free to customize this README according to your project's specific details. Happy coding and exercising with BodyBuddy! 🏋️‍♂️💪
+Feel free to customize this README according to your project's specific details. Happy coding and exercising with bodybuddy! 🏋️‍♂️💪
