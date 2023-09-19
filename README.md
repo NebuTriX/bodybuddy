@@ -1,5 +1,7 @@
 # bodybuddy - Fitness Exercise App with Machine Learning
 
+[![Project Status: WIP](https://img.shields.io/badge/Project%20Status-WIP-blue.svg)](https://github.com/NebulaTris/bodybuddy)
+
 bodybuddy is a fitness exercise app built with React 18. It leverages machine learning and your device's webcam to recommend exercises for different target areas, correct your pose, and count your reps. Get ready to elevate your fitness journey to the next level!
 
 ## Features
