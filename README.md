@@ -1,18 +1,12 @@
-# bodybuddy - Fitness Exercise App with Machine Learning
+# bodybuddy - Fitness Exercise App 
 
-bodybuddy is a fitness exercise app built with React 18. It leverages machine learning and your device's webcam to recommend exercises for different target areas, correct your pose, and count your reps. Get ready to elevate your fitness journey to the next level!
+bodybuddy is a fitness exercise app built with React 18. Get ready to elevate your fitness journey to the next level!
 
 ## Features
 
 - **Exercise Recommendations**: Receive personalized exercise recommendations based on your target areas and fitness goals.
 
-- **Pose Correction**: BodyBuddy uses advanced machine learning algorithms to analyze your posture and provide real-time feedback for improved form.
-
-- **Rep Counting**: Keep track of your repetitions automatically, ensuring accurate and consistent workouts.
-
 - **User-Friendly Interface**: Navigate the app with ease thanks to its intuitive and modern user interface.
-
-- **Progress Tracking**: Monitor your fitness progress over time with detailed statistics and visualizations.
 
 ## Getting Started
 
