@@ -1,6 +1,6 @@
-# bodybuddy - Fitness Exercise App 
+<p align="center"><img src="logo.png" height = "300" ></img></p>
 
-bodybuddy is a fitness exercise app built with React 18. Get ready to elevate your fitness journey to the next level!
+BodyBuddy is a fitness exercise app built with React 18. Get ready to elevate your fitness journey to the next level!
 
 ## Features
 
